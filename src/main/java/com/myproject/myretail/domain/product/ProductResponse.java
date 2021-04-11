@@ -1,22 +1,22 @@
 package com.myproject.myretail.domain.product;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class ProductResponse {
-    Integer id;
-    String name;
-    CurrentPrice current_price;
+    private Integer id;
+    private String name;
+    private Price currentPrice;
 
     @Getter
     @Setter
-    @AllArgsConstructor
+    @NoArgsConstructor
     public static class CurrentPrice {
-        Double value;
-        String currencyCode;
+        private Double value;
+        private String currencyCode;
     }
 }
