@@ -14,7 +14,7 @@
   <artifactId>myRetail</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>myRetail</name>
-  <description>Restful API for productDetails and priceEntity information</description>
+  <description>Restful web service for productDetails information</description>
 
   <properties>
     <java.version>11</java.version>
