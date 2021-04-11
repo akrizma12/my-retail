@@ -1,0 +1,18 @@
+version: '3.6'
+
+networks:
+  retail_network:
+    name: retail_network
+
+services:
+  mongo-db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    container_name: mongo_db
+    networks:
+      - retail_network
+    volumes:
+      - ./mongodb/db/:/data/db
+      - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+
