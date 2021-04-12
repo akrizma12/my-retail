@@ -8,7 +8,6 @@ import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@PropertySource("classpath:/config/environments/${environment:local}.properties")
 public class MyRetailApplication {
 
     @Bean

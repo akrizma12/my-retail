@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface PriceRepository extends MongoRepository<PriceEntity, Integer> {
 
-    PriceEntity findByProductId(Integer productId);
+    PriceEntity findPriceEntityByProductId(Integer productId);
 
     void deleteByProductId(Integer productId);
 }

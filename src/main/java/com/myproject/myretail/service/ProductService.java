@@ -17,22 +17,22 @@ public class ProductService {
 
     public ProductResponse getProductData(Integer productId) {
         String productName = redskyClient.getProductName(productId);
-        PriceEntity priceEntity = priceRepository.findByProductId(productId);
+        PriceEntity priceEntity = priceRepository.findPriceEntityByProductId(productId);
+
         ProductResponse productResponse = new ProductResponse();
         productResponse.setId(productId);
-        if (productName != null) {
-            productResponse.setName(productName);
-        }
+        productResponse.setName(productName);
+
         if (priceEntity != null) {
-            Price currentPriceEntity = new Price(priceEntity.getPrice(), priceEntity.getCurrencyCode());
-            productResponse.setCurrentPrice(currentPriceEntity);
+            Price price = new Price(priceEntity.getPrice(), priceEntity.getCurrencyCode());
+            productResponse.setCurrentPrice(price);
         }
         return productResponse;
     }
 
     public void updateProductPrice(Integer productId, Price price) {
         PriceEntity priceEntity = new PriceEntity(productId, price.getValue(), price.getCurrencyCode());
-        if (priceRepository.findByProductId(productId) == null) {
+        if (priceRepository.findPriceEntityByProductId(productId) == null) {
             priceRepository.save(priceEntity);
         } else {
             priceRepository.deleteByProductId(productId);

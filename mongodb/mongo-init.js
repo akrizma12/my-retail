@@ -1,10 +1,14 @@
+use myretaildb
 db.createUser(
   {
-    user: "admin",
-    pwd: "adminPassword",
-    roles: [
-      { role: "readWrite", db: "price" }
-    ]
+    user: "myretail",
+    pwd: "password123",
+    roles: [ 
+        {
+            role: "readAnyDatabase", db: "admin" 
+        },
+        "readWrite"
+    ] 
   }
 )
 
@@ -31,4 +35,4 @@ data = [
     currency_code: "USD"
   }
 ]
-db.price.save(data)
+db.priceEntity.save(data)

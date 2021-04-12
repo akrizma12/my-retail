@@ -22,7 +22,7 @@ class ProductServiceSpec extends Specification{
 
     then:
     1 * redskyClient.getProductName(productId) >> "product description"
-    1 * priceRepository.findByProductId(productId) >> new PriceEntity(productId, 12.45, "USD")
+    1 * priceRepository.findPriceEntityByProductId(productId) >> new PriceEntity(productId, 12.45, "USD")
 
     productResponse.id == productId
     productResponse.name == "product description"
@@ -39,7 +39,7 @@ class ProductServiceSpec extends Specification{
 
     then:
     1 * redskyClient.getProductName(productId) >> null
-    1 * priceRepository.findByProductId(productId) >> null
+    1 * priceRepository.findPriceEntityByProductId(productId) >> null
 
     productResponse.id == productId
     productResponse.name == null
