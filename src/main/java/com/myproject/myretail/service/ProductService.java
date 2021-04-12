@@ -7,6 +7,7 @@ import com.myproject.myretail.domain.product.ProductResponse;
 import com.myproject.myretail.repository.PriceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -30,13 +31,20 @@ public class ProductService {
         return productResponse;
     }
 
-    public void updateProductPrice(Integer productId, Price price) {
+    public Price updateProductPriceAndReturn(Integer productId, Price price) {
         PriceEntity priceEntity = new PriceEntity(productId, price.getValue(), price.getCurrencyCode());
         if (priceRepository.findPriceEntityByProductId(productId) == null) {
             priceRepository.save(priceEntity);
         } else {
-            priceRepository.deleteByProductId(productId);
-            priceRepository.save(priceEntity);
+            updateProductPriceAndReturn(priceEntity, productId);
         }
+        PriceEntity updatedPriceEntity = priceRepository.findPriceEntityByProductId(productId);
+        return new Price(updatedPriceEntity.getPrice(), updatedPriceEntity.getCurrencyCode());
+    }
+
+    @Transactional
+    public void updateProductPriceAndReturn(PriceEntity priceEntity, Integer productId) {
+        priceRepository.deleteByProductId(productId);
+        priceRepository.save(priceEntity);
     }
 }
